@@ -25,7 +25,7 @@ export interface JugadorPayload {
   providedIn: 'root'
 })
 export class JugadorService {
-private readonly apiUrl = 'https://TU-BACKEND.vercel.app/api/v1/jugadores';
+private readonly apiUrl = 'https://proyecto-alvaro.vercel.app/api/v1/jugadores';
   constructor(private readonly http: HttpClient) {}
 
   getJugadores(): Observable<Jugador[]> {
