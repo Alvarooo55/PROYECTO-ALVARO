@@ -9,10 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "index.js"
+      "dest": "/index.js"
     }
-  ],
-  "env": {
-    "PORT": "3000"
-  }
+  ]
 }

@@ -3,8 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
-const {mongoose} = require('./database');
-const {json} = require('express');
+require('./database');
 
 //Middlewares
 app.use(morgan('dev'));
@@ -19,7 +18,11 @@ app.use('/', (req, res) => res.send('API is in /api/v1/jugadores/'));
 
 //Settings
 app.set('port', process.env.PORT || 3000);
-//iniciar el server
-app.listen(app.get('port'),() =>{
-    console.log('Server on port', app.get('port'));
-})
+
+if (!process.env.VERCEL) {
+    app.listen(app.get('port'),() =>{
+        console.log('Server on port', app.get('port'));
+    });
+}
+
+module.exports = app;
