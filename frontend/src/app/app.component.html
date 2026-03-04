@@ -1,0 +1,126 @@
+<main class="container py-5 app-shell" data-bs-theme="dark">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xxl-10">
+      <section class="hero card border-0 shadow-sm mb-4">
+        <div class="card-body p-4 p-lg-5 d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+          <div>
+            <p class="text-uppercase text-secondary small fw-semibold mb-2">Panel de gestión</p>
+            <h1 class="display-6 mb-1">CRUD Jugadores</h1>
+            <p class="text-secondary mb-0">Administra altas, cambios y bajas de jugadores desde una sola pantalla.</p>
+          </div>
+          <div class="stats-box text-center">
+            <p class="text-secondary small mb-1">Total registrados</p>
+            <p class="display-6 fw-bold mb-0">{{ jugadores.length }}</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="card form-card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+          <h2 class="h4 mb-3">{{ editId ? 'Editar jugador' : 'Nuevo jugador' }}</h2>
+
+          <div class="alert alert-success border-0" *ngIf="mensaje" role="alert">
+            {{ mensaje }}
+          </div>
+
+          <div class="alert alert-danger border-0" *ngIf="error" role="alert">
+            {{ error }}
+          </div>
+
+          <form [formGroup]="jugadorForm" (ngSubmit)="guardarJugador()" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Nombre</label>
+              <input class="form-control form-control-lg" type="text" formControlName="nombre" />
+              <div class="text-danger small mt-1" *ngIf="jugadorForm.controls.nombre.touched && jugadorForm.controls.nombre.invalid">
+                Nombre obligatorio (mínimo 2 caracteres)
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Equipo</label>
+              <input class="form-control form-control-lg" type="text" formControlName="equipo" />
+              <div class="text-danger small mt-1" *ngIf="jugadorForm.controls.equipo.touched && jugadorForm.controls.equipo.invalid">
+                Equipo obligatorio (mínimo 2 caracteres)
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label fw-semibold">Temporadas</label>
+              <input class="form-control form-control-lg" type="number" formControlName="temporadas" />
+              <div class="text-danger small mt-1" *ngIf="jugadorForm.controls.temporadas.touched && jugadorForm.controls.temporadas.invalid">
+                Mínimo 1 temporada
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label fw-semibold">Goles</label>
+              <input class="form-control form-control-lg" type="number" formControlName="goles" />
+              <div class="text-danger small mt-1" *ngIf="jugadorForm.controls.goles.touched && jugadorForm.controls.goles.invalid">
+                Mínimo 1 gol
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex align-items-end">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" formControlName="activo" id="activo" />
+                <label class="form-check-label fw-semibold" for="activo">Activo</label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold">Descripción</label>
+              <textarea class="form-control" rows="4" formControlName="descripcion"></textarea>
+              <div class="text-danger small mt-1" *ngIf="jugadorForm.controls.descripcion.touched && jugadorForm.controls.descripcion.invalid">
+                Descripción obligatoria (mínimo 4 caracteres)
+              </div>
+            </div>
+
+            <div class="col-12 d-flex flex-wrap gap-2 pt-1">
+              <button class="btn btn-primary px-4" type="submit">{{ editId ? 'Actualizar' : 'Crear' }}</button>
+              <button class="btn btn-outline-secondary px-4" type="button" *ngIf="editId" (click)="cancelarEdicion()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-modern">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Equipo</th>
+                  <th class="text-center">Temporadas</th>
+                  <th class="text-center">Goles</th>
+                  <th class="text-center">Activo</th>
+                  <th class="text-end">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let jugador of jugadores">
+                  <td class="fw-semibold">{{ jugador.nombre }}</td>
+                  <td><span class="text-secondary">{{ jugador.equipo }}</span></td>
+                  <td class="text-center">{{ jugador.temporadas }}</td>
+                  <td class="text-center">{{ jugador.goles }}</td>
+                  <td class="text-center">
+                    <span class="badge" [ngClass]="jugador.activo ? 'text-bg-success' : 'text-bg-secondary'">
+                      {{ jugador.activo ? 'Sí' : 'No' }}
+                    </span>
+                  </td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-primary me-2" type="button" (click)="editarJugador(jugador)">Editar</button>
+                    <button class="btn btn-sm btn-outline-danger" type="button" (click)="eliminarJugador(jugador._id)">Eliminar</button>
+                  </td>
+                </tr>
+                <tr *ngIf="jugadores.length === 0">
+                  <td colspan="6" class="text-center py-5 text-muted">No hay jugadores registrados.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

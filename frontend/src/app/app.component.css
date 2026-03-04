@@ -1,0 +1,75 @@
+:host {
+  display: block;
+}
+
+.app-shell {
+  --bs-primary: #6ea8fe;
+  --bs-primary-rgb: 110, 168, 254;
+  --bs-body-bg: #121a2a;
+  --bs-body-bg-rgb: 18, 26, 42;
+  --bs-body-color: #e8eefc;
+  --bs-secondary-color: #aebad3;
+  --bs-border-color: rgba(194, 210, 235, 0.18);
+}
+
+.hero,
+.form-card,
+.card {
+  border-radius: 1rem;
+  background-color: rgba(20, 29, 46, 0.9);
+  border: 1px solid rgba(194, 210, 235, 0.14) !important;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    rgba(var(--bs-primary-rgb), 0.22),
+    rgba(24, 35, 56, 0.95)
+  );
+}
+
+.stats-box {
+  min-width: 180px;
+  background-color: rgba(9, 14, 24, 0.45);
+  border: 1px solid rgba(190, 207, 233, 0.2);
+  border-radius: 0.85rem;
+  padding: 0.9rem 1rem;
+}
+
+.form-control,
+.form-check-input {
+  background-color: rgba(12, 19, 32, 0.75);
+  border-color: rgba(190, 207, 233, 0.2);
+  color: #eef3ff;
+}
+
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15);
+}
+
+.form-control::placeholder {
+  color: rgba(208, 220, 241, 0.55);
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+  border-color: rgba(194, 210, 235, 0.12);
+}
+
+.table-modern thead th {
+  background-color: rgba(13, 20, 34, 0.82);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #b8c6df;
+}
+
+.table-modern tbody tr:hover {
+  background-color: rgba(var(--bs-primary-rgb), 0.09);
+}
+
+.text-secondary {
+  color: rgba(214, 224, 243, 0.76) !important;
+}
