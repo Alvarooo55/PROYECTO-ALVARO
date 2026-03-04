@@ -25,7 +25,7 @@ export interface JugadorPayload {
   providedIn: 'root'
 })
 export class JugadorService {
-  private readonly apiUrl = 'http://localhost:3000/api/v1/jugadores';
+  private readonly apiUrl = 'https://backend-fup0dgtfs-alvaros-projects-c48795ed.vercel.app/api/v1/jugadores';
 
   constructor(private readonly http: HttpClient) {}
 
